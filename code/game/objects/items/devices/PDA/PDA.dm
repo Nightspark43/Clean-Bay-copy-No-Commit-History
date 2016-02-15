@@ -233,6 +233,15 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		ownrank = ownjob
 	name = newname + " (" + ownjob + ")"
 
+/mob/living/silicon/ai/proc/cmd_send_pdamesg()
+	set category = "AI Commands"
+	set name = "Send Message"
+	aiPDA.cmd_send_pdamesg()
+
+/mob/living/silicon/ai/proc/cmd_show_message_log()
+	set category = "AI Commands"
+	set name = "Show Message Log"
+	aiPDA.cmd_show_message_log()
 
 //AI verb and proc for sending PDA messages.
 /obj/item/device/pda/ai/verb/cmd_send_pdamesg()
