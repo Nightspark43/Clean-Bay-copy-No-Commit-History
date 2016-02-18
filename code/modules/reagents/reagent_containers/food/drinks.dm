@@ -108,6 +108,12 @@
 		..()
 		reagents.add_reagent("coffee", 30)
 
+	on_reagent_change()
+		if(reagents.total_volume)
+			icon_state = "coffee"
+		else
+			icon_state = "coffee_e"
+
 /obj/item/weapon/reagent_containers/food/drinks/tea
 	name = "Duke Purple Tea"
 	desc = "An insult to Duke Purple is an insult to the Space Queen! Any proper gentleman will fight you, if you sully this tea."
@@ -118,6 +124,12 @@
 		..()
 		reagents.add_reagent("tea", 30)
 
+	on_reagent_change()
+		if(reagents.total_volume)
+			icon_state = "teacup"
+		else
+			icon_state = "teacup_e"
+
 /obj/item/weapon/reagent_containers/food/drinks/ice
 	name = "Ice Cup"
 	desc = "Careful, cold ice, do not chew."
@@ -126,6 +138,12 @@
 	New()
 		..()
 		reagents.add_reagent("ice", 30)
+
+	on_reagent_change()
+		if(reagents.total_volume)
+			icon_state = "ice"
+		else
+			icon_state = "coffee_e"
 
 /obj/item/weapon/reagent_containers/food/drinks/h_chocolate
 	name = "Dutch Hot Coco"
