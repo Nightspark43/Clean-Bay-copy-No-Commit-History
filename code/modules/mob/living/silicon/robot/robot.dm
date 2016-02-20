@@ -110,6 +110,16 @@
 	spark_system.attach(src)
 
 	add_language("Robot Talk", 1)
+	add_language("Galactic Common", 1)
+	add_language("Sol Common", 0)
+	add_language("Sinta'unathi", 0)
+	add_language("Siik'tajr", 0)
+	add_language("Skrellian", 0)
+	add_language("Tradeband", 1)
+	add_language("Gutter", 0)
+	add_language("Chittin", 0)
+	add_language("Aviachirp", 0)
+	add_language("Encoded Audio Language", 1)
 
 	wires = new(src)
 
