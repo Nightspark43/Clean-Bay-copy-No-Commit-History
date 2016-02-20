@@ -20,7 +20,7 @@
 			            access_research, access_engine, access_mining, access_medical, access_construction, access_mailsorting,
 			            access_heads, access_hos, access_RC_announce, access_keycard_auth, access_gateway, access_external_airlocks, access_deptguard, access_paramedic, access_blueshield)
 	alt_titles = list("Security Commander")
-	minimal_player_age = 14
+	minimal_player_age = 3
 
 	equip(var/mob/living/carbon/human/H)
 		if(!H)	return 0
@@ -57,7 +57,7 @@
 	selection_color = "#ffeeee"
 	access = list(access_security, access_eva, access_sec_doors, access_brig, access_armory, access_court, access_maint_tunnels, access_morgue, access_external_airlocks)
 	minimal_access = list(access_security, access_eva, access_sec_doors, access_brig, access_armory, access_court, access_maint_tunnels, access_external_airlocks)
-	minimal_player_age = 5
+//	minimal_player_age = 3
 
 	equip(var/mob/living/carbon/human/H)
 		if(!H)	return 0
@@ -92,7 +92,7 @@
 	req_admin_notify = 1
 	access = list(access_sec_doors, access_tcomsat, access_teleporter, access_heads, access_blueshield)
 	minimal_access = list(access_sec_doors, access_tcomsat, access_teleporter, access_heads, access_blueshield)
-	minimal_player_age = 14
+	minimal_player_age = 3
 
 	equip(var/mob/living/carbon/human/H)
 		if(!H)	return 0
@@ -130,7 +130,7 @@
 	access = list(access_security, access_sec_doors, access_forensics_lockers, access_morgue, access_maint_tunnels, access_court)
 	minimal_access = list(access_security, access_sec_doors, access_forensics_lockers, access_morgue, access_maint_tunnels, access_court)
 	alt_titles = list("Forensic Technician", "Private Investigator")
-	minimal_player_age = 3
+//	minimal_player_age = 3
 	equip(var/mob/living/carbon/human/H)
 		if(!H)	return 0
 		H.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_sec(H), slot_l_ear)
@@ -171,7 +171,7 @@
 	access = list(access_security, access_eva, access_sec_doors, access_brig, access_court, access_maint_tunnels, access_morgue, access_external_airlocks)
 	minimal_access = list(access_security, access_eva, access_sec_doors, access_brig, access_court, access_maint_tunnels, access_external_airlocks)
 	alt_titles = list("Security Guard")
-	minimal_player_age = 3
+//	minimal_player_age = 3
 	equip(var/mob/living/carbon/human/H)
 		if(!H)	return 0
 		H.equip_to_slot_or_del(new /obj/item/device/radio/headset/headset_sec(H), slot_l_ear)
@@ -199,9 +199,9 @@
 	spawn_positions = 3
 	supervisors = "the head of security and the head of your guarded department"
 	selection_color = "#ffeeee"
-	access = list(access_deptguard, access_security)
+	access = list(access_deptguard, access_security, access_eva, access_sec_doors, access_brig)
 	minimal_access = list(access_deptguard, access_security, access_sec_doors, access_maint_tunnels)
-	minimal_player_age = 3
+//	minimal_player_age = 3
 	var/medical = 0
 	var/engine = 0
 	var/research = 0
