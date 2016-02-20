@@ -104,7 +104,7 @@
 		if(!client)
 			species.handle_npc(src)
 
-	handle_stasis_bag()
+//	handle_stasis_bag()
 
 	if(life_tick > 5 && timeofdeath && (timeofdeath < 5 || world.time - timeofdeath > 6000))	//We are long dead, or we're junk mobs spawned like the clowns on the clown shuttle
 		return											//We go ahead and process them 5 times for HUD images and other stuff though.
@@ -245,7 +245,7 @@
 				if(10 <= rn && rn <= 12) if(!lying)
 					src << "\red Your legs won't respond properly, you fall down."
 					resting = 1
-
+/*
 	proc/handle_stasis_bag()
 		// Handle side effects from stasis bag
 		if(in_stasis)
@@ -255,7 +255,7 @@
 			// Next, the method to induce stasis has some adverse side-effects, manifesting
 			// as cloneloss
 			adjustCloneLoss(0.1)
-
+*/
 	proc/handle_mutations_and_radiation()
 
 		if(species.flags & IS_SYNTHETIC) //Robots don't suffer from mutations or radloss.
@@ -368,14 +368,14 @@
 
 	get_breath_from_environment(var/volume_needed=BREATH_VOLUME)
 		var/datum/gas_mixture/breath = ..()
-	
+
 		if(breath)
 			//exposure to extreme pressures can rupture lungs
 			var/check_pressure = breath.return_pressure()
 			if(check_pressure < ONE_ATMOSPHERE / 5 || check_pressure > ONE_ATMOSPHERE * 5)
 				if(!is_lung_ruptured() && prob(5))
 					rupture_lung()
-		
+
 		return breath
 
 	handle_breath(datum/gas_mixture/breath)
