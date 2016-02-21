@@ -334,3 +334,36 @@
 
 
 		return 1
+
+/datum/job/librarian
+	title = "General Secretary"
+	flag = SECRETARY
+	department = "Civilian"
+	department_flag = CIVILIAN
+	faction = "Station"
+	total_positions = 1
+	spawn_positions = 1
+	supervisors = "all of the heads of staff"
+	selection_color = "#dddddd"
+	idtype = /obj/item/weapon/card/id/silver
+	access = list(access_security, access_sec_doors, access_court,
+			            access_medical, access_eva, access_heads,
+			            access_all_personal_lockers, access_maint_tunnels, access_bar, access_janitor, access_construction, access_morgue,
+			            access_crematorium, access_kitchen, access_cargo, access_cargo_bot, access_mailsorting, access_hydroponics, access_lawyer,
+			            access_theatre, access_chapel_office, access_library, access_research, access_mining, access_mining_station,
+			            access_clown, access_mime, access_RC_announce, access_gateway)
+	minimal_access = list(access_security, access_sec_doors, access_court,
+			            access_medical, access_eva, access_heads,
+			            access_all_personal_lockers, access_maint_tunnels, access_bar, access_janitor, access_construction, access_morgue,
+			            access_crematorium, access_kitchen, access_cargo, access_cargo_bot, access_mailsorting, access_hydroponics, access_lawyer,
+			            access_theatre, access_chapel_office, access_library, access_research, access_mining, access_mining_station,
+			            access_clown, access_mime, access_RC_announce, access_gateway)
+	alt_titles = list("Personal Assistant")
+
+
+	equip(var/mob/living/carbon/human/H)
+		if(!H)	return 0
+		H.equip_to_slot_or_del(new /obj/item/clothing/under/suit_jacket/burgundy(H), slot_w_uniform)
+		H.equip_to_slot_or_del(new /obj/item/device/pda/heads/hop(H), slot_belt)
+		H.equip_to_slot_or_del(new /obj/item/clothing/shoes/laceup(H), slot_shoes)
+		return 1
