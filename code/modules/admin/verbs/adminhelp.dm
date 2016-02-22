@@ -124,8 +124,8 @@ var/list/adminhelp_ignored_words = list("unknown","the","a","an","of","monkey","
 					admin_number_afk++
 */
 		if(R_MOD & X.holder.rights || R_BAN & X.holder.rights) // Looking for anyone with +Debug which will be admins, developers, and developer mentors
-			modholders += X
 			if(!(R_ADMIN & X.holder.rights))
+				modholders += X
 				if(X.is_afk())
 					admin_number_afk++
 		if(R_ADMIN & X.holder.rights || R_ADMIN & X.holder.rights) // just admins here please
