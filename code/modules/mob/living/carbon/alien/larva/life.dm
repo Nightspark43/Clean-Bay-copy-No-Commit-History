@@ -10,3 +10,7 @@
 		adjustFireLoss(-1)
 		adjustToxLoss(-1)
 		adjustOxyLoss(-1)
+
+	//Admin Freeze
+	if(admin_freeze)
+		SetWeakened(200)

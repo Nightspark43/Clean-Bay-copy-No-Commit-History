@@ -21,6 +21,11 @@
 		process_queued_alarms()
 	update_canmove()
 
+	//Admin Freezing
+	if(admin_freeze)
+		SetWeakened(200)
+		overlays += adminoverlay
+
 /mob/living/silicon/robot/proc/clamp_values()
 
 //	SetStunned(min(stunned, 30))

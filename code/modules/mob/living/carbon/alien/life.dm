@@ -33,6 +33,10 @@
 	if(client)
 		handle_regular_hud_updates()
 
+	//Admin Freezing
+	if(admin_freeze)
+		SetWeakened(200)
+
 /mob/living/carbon/alien/proc/handle_chemicals_in_body()
 	return // Nothing yet. Maybe check it out at a later date.
 

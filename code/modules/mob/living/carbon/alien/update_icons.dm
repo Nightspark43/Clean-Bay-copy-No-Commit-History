@@ -18,3 +18,7 @@
 		icon_state = "[initial(icon_state)][state]_sleep"
 	else
 		icon_state = "[initial(icon_state)][state]"
+
+	//Admin freezing
+	if(admin_freeze)
+		overlays += adminoverlay

@@ -130,6 +130,10 @@
 	for(var/obj/item/weapon/grab/G in src)
 		G.process()
 
+	//Admin freezing
+	if(admin_freeze)
+		SetWeakened(200)
+
 // Calculate how vulnerable the human is to under- and overpressure.
 // Returns 0 (equals 0 %) if sealed in an undamaged suit, 1 if unprotected (equals 100%).
 // Suitdamage can modifiy this in 10% steps.

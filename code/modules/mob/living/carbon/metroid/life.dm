@@ -29,6 +29,10 @@
 
 	handle_regular_status_updates() // Status updates, death etc.
 
+	//Admin Freezing
+	if(admin_freeze)
+		SetWeakened(200)
+
 /mob/living/carbon/slime/proc/handle_environment(datum/gas_mixture/environment)
 	if(!environment)
 		adjustToxLoss(rand(10,20))

@@ -175,6 +175,9 @@ Please contact me on #coderbus IRC. ~Carn x
 		M.Translate(0, 16*(size_multiplier-1))
 		src.transform = M
 
+	if(admin_freeze)
+		overlays += adminoverlay
+
 var/global/list/damage_icon_parts = list()
 
 //DAMAGE OVERLAYS

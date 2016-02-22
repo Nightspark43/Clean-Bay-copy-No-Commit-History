@@ -105,6 +105,10 @@
 	update_canmove()
 	handle_supernatural()
 
+	//Admin Freezing
+	if(admin_freeze)
+		SetWeakened(200)
+
 	//Movement
 	if(!client && !stop_automated_movement && wander && !anchored)
 		if(isturf(src.loc) && !resting && !buckled && canmove)		//This is so it only moves if it's not inside a closet, gentics machine, etc.
