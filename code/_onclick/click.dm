@@ -94,6 +94,8 @@
 		next_move = world.time + 6
 		if(W.flags&USEDELAY)
 			next_move += 5
+		if(W.flags&SHORTDELAY)
+			next_move -= 2
 		W.attack_self(src)
 		if(hand)
 			update_inv_l_hand(0)
@@ -116,6 +118,8 @@
 		if(W)
 			if(W.flags&USEDELAY)
 				next_move += 5
+			if(W.flags&SHORTDELAY)
+				next_move -= 2
 
 			var/resolved = A.attackby(W,src)
 			if(!resolved && A && W)
@@ -136,6 +140,8 @@
 			if(W)
 				if(W.flags&USEDELAY)
 					next_move += 5
+				if(W.flags&SHORTDELAY)
+					next_move -= 2
 
 				// Return 1 in attackby() to prevent afterattack() effects (when safely moving items for example)
 				var/resolved = A.attackby(W,src)

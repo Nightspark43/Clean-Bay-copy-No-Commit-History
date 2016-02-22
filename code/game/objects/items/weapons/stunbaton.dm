@@ -56,7 +56,7 @@
 		return
 
 	if(bcell)
-		user <<"<span class='notice'>The baton is [round(bcell.percent())]% charged.</span>"
+		user <<"<span class='notice'>The [src] is [round(bcell.percent())]% charged.</span>"
 	if(!bcell)
 		user <<"<span class='warning'>The baton does not have a power source installed.</span>"
 
@@ -112,7 +112,7 @@
 	var/agony = agonyforce
 	var/stun = stunforce
 	var/mob/living/L = M
-
+	var/pacification = 0
 	var/target_zone = check_zone(user.zone_sel.selecting)
 	if(user.a_intent == I_HURT)
 		if (!..())	//item/attack() does it's own messaging and logs
@@ -120,7 +120,15 @@
 		agony *= 0.5	//whacking someone causes a much poorer contact than prodding them.
 		stun *= 0.5
 		//we can't really extract the actual hit zone from ..(), unfortunately. Just act like they attacked the area they intended to.
-	else
+
+	if(user.a_intent == I_DISARM)
+		for(var/obj/item/weapon/grab/G in user)
+			if(G.assailant == user && G.state >= GRAB_AGGRESSIVE && world.time >= (G.last_action + 40))
+				pacification = 	1
+				flick(G.hud.icon_state, G.hud)
+				G.last_action = world.time
+
+	else if(pacification == 0)
 		//copied from human_defense.dm - human defence code should really be refactored some time.
 		if (ishuman(L))
 			user.lastattacked = L	//are these used at all, if we have logs?
@@ -148,17 +156,53 @@
 			else
 				L.visible_message("<span class='danger'>[L] has been prodded with [src] by [user]!</span>")
 
-	//stun effects
-	L.stun_effect_act(stun, agony, target_zone, src)
 
-	playsound(loc, 'sound/weapons/Egloves.ogg', 50, 1, -1)
-	msg_admin_attack("[key_name(user)] stunned [key_name(L)] with the [src].")
+	if(pacification == 1)
+		if(L == user)
+			return
+		if(!status)
+			L.visible_message("<span class='warning'>[L] has been prodded in the neck with [src] by [user]. Luckily it was off.</span>")
+			return
+		deductcharge(hitcost * 6)
+		bcell.charge -= 600 * 6
+		playsound(loc, 'sound/weapons/pacification.ogg', 50, 1, -1)
+		L.adjustOxyLoss(20) // Preventing accidental death when used 'properly'.
 
-	deductcharge(hitcost)
+		spawn(7)
+			shake_camera(L,15)
+			L.stun_effect_act(0, 40, , src)
+		spawn(14)
+			L.stun_effect_act(0, 40, , src)
+			shake_camera(L,15)
+		spawn(21)
+			L.stun_effect_act(0, 40, , src)
+			shake_camera(L,15)
+		spawn(29)
+			L.stun_effect_act(0, 40, , src)
+			shake_camera(L,15)
 
-	if(ishuman(L))
-		var/mob/living/carbon/human/H = L
-		H.forcesay(hit_appends)
+		user.visible_message("<span class='danger'>[user] holds the \the [name] against the back of [L]'s neck!</span>")
+		user.attack_log += "\[[time_stamp()]\]<font color='red'> Pacified [L.name] ([L.ckey]) with [name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(damtype)])</font>"
+		L.attack_log += "\[[time_stamp()]\]<font color='orange'> Got pacified by [user.name] ([user.ckey]) with [name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(damtype)])</font>"
+		msg_admin_attack("[key_name(user)] pacified [key_name(L)] with [name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(damtype)])" )
+		return 1
+
+
+	else
+		if(!status)
+			L.visible_message("<span class='warning'>[L] has been prodded with \the [src] by [user]. Luckily it was off.</span>")
+			return
+		//stun effects
+		L.stun_effect_act(stun, agony, target_zone, src)
+
+		playsound(loc, 'sound/weapons/Egloves.ogg', 50, 1, -1)
+		msg_admin_attack("[key_name(user)] stunned [key_name(L)] with the [src].")
+
+		deductcharge(hitcost)
+
+		if(ishuman(L))
+			var/mob/living/carbon/human/H = L
+			H.forcesay(hit_appends)
 
 	return 1
 
@@ -191,3 +235,22 @@
 	hitcost = 2500
 	attack_verb = list("poked")
 	slot_flags = null
+
+/obj/item/weapon/melee/baton/stungun
+	name = "MPS"
+	desc = "A Manual Pacification System, an extremely close-range means of subduing targets. It interfaces with the recipient, dealing a controlled electrical shock based on placement, preventing accidental death when used properly."
+	icon_state = "MPS"
+	item_state = "MPS"
+	flags = SHORTDELAY
+	w_class = 2
+	agonyforce = 40
+	force = 6
+	icon_state = "MPS"
+	item_state = "MPS"
+	hitcost = 500
+
+/obj/item/weapon/melee/baton/stungun/loaded/New()
+	..()
+	bcell = new/obj/item/weapon/cell/high(src)
+	update_icon()
+	return
