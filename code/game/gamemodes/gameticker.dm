@@ -29,8 +29,6 @@ var/global/datum/controller/gameticker/ticker
 
 	var/delay_end = 0	//if set to nonzero, the round will not restart on it's own
 
-	var/triai = 0//Global holder for Triumvirate
-
 	var/round_end_announced = 0 // Spam Prevention. Announce round end only once.
 
 /datum/controller/gameticker/proc/pregame()
