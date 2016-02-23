@@ -46,7 +46,7 @@ var/const/CHAPLAIN			=(1<<10)
 var/const/CLOWN				=(1<<11)
 var/const/MIME				=(1<<12)
 var/const/ASSISTANT			=(1<<13)
-var/const/SECRETARY			=(1<<14)
+//var/const/SECRETARY			=(1<<14)
 
 
 var/list/assistant_occupations = list(
@@ -60,8 +60,8 @@ var/list/command_positions = list(
 	"Chief Engineer",
 	"Research Director",
 	"Chief Medical Officer",
-	"Blueshield Guard",
-	"General Secretary"
+	"Blueshield Guard"/*,
+	"General Secretary"*/
 )
 
 
