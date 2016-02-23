@@ -14,7 +14,7 @@ var/image/adminoverlay = image('icons/effects/effects.dmi',icon_state="adminover
 	if(M.client)
 		if(!M.admin_freeze)
 			M.admin_freeze = 1
-			if(!istype(M, /mob/living/carbon/slime))
+			if(istype(M, /mob/living/carbon/slime))
 				M.canmove = 0
 			else
 				M.SetWeakened(200)
@@ -24,7 +24,7 @@ var/image/adminoverlay = image('icons/effects/effects.dmi',icon_state="adminover
 			log_and_message_admins("\blue [key_name_admin(usr)] froze [key_name(M)]")
 		else
 			M.admin_freeze = 0
-			if(!istype(M, /mob/living/carbon/slime))
+			if(istype(M, /mob/living/carbon/slime))
 				M.canmove = 1
 			else
 				M.SetWeakened(0)
