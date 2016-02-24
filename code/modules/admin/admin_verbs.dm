@@ -297,7 +297,12 @@ var/list/admin_verbs_mod = list(
 	/client/proc/cmd_admin_subtle_message,	/*send an message to somebody as a 'voice in their head'*/\
 	/client/proc/cmd_admin_rejuvenate,
 	/client/proc/forceshuttles,
-	/client/proc/FRules
+	/client/proc/FRules,
+	/client/proc/Jump,
+	/client/proc/jumptomob,
+	/client/proc/jumptoturf,
+	/client/proc/jumptocoord,
+	/client/proc/jumptokey
 )
 
 var/list/admin_verbs_mentor = list(
