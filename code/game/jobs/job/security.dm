@@ -199,8 +199,8 @@
 	spawn_positions = 3
 	supervisors = "the head of security and the head of your guarded department"
 	selection_color = "#ffeeee"
-	access = list(access_deptguard, access_security, access_eva, access_sec_doors, access_brig)
-	minimal_access = list(access_deptguard, access_security, access_sec_doors, access_maint_tunnels)
+	access = list(access_deptguard, access_security, access_sec_doors, access_court, access_maint_tunnels)
+	minimal_access = list(access_deptguard, access_security, access_sec_doors, access_court, access_maint_tunnels)
 //	minimal_player_age = 3
 	var/medical = 0
 	var/engine = 0
