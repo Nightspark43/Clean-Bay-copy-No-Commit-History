@@ -83,79 +83,84 @@
 		else
 			return list()
 
-/client/proc/admincryo(mob/living/M as mob in mob_list)
+/client/proc/admincryo(var/mob/living/M in mob_list)
 	set category = "Special Verbs"
 	set name = "Admin Cryo"
 	if(!holder)
 		src << "Only administrators may use this command."
 		return
-	if(!mob)
+	if(!M)
 		return
 	if(!istype(M))
 		alert("Cannot cryo a ghost")
 		return
 
-	if(usr)
-		var/confirm = alert(src, "You will be removing [M] from the round, are you sure?", "Message", "Yes", "No")
-		if(confirm != "Yes")
-			return
-		if (usr.client)
-			if(usr.client.holder)
-				var/job = M.mind.assigned_role
-				
-				for(var/obj/item/Player_Inventory in M)
-					if(istype(Player_Inventory, /obj/item/organ))
-						qdel(Player_Inventory)
-
-				var/obj/structure/closet/crate/secure/K = new /obj/structure/closet/crate/secure/(M.loc)
-				K.req_access += get_access(job)
-				K.name = (M.real_name + " - " + job + " - SSD Crate")
-				K.health = 1000000
-				K.contents = M.contents
-				for(var/datum/objective/O in all_objectives)
-					if(O.target && istype(O.target,/datum/mind))
-						if(O.target == M.mind)
-							if(O.owner && O.owner.current)
-								O.owner.current << "\red You get the feeling your target is no longer within your reach. Time for Plan [pick(list("A","B","C","D","X","Y","Z"))]..."
-							O.target = null
-							spawn(1) //This should ideally fire after the M is deleted.
-								if(!O) return
-								O.find_target()
-								if(!(O.target))
-									all_objectives -= O
-									O.owner.objectives -= O
-									del(O)
-
-				//Handle job slot/tater cleanup.
-				job_master.FreeRole(job)
-
-				if(M.mind.objectives.len)
-					del(M.mind.objectives)
-					M.mind.special_role = null
-
-				// Delete them from datacore.
-
-				if(PDA_Manifest.len)
-					PDA_Manifest.Cut()
-				for(var/datum/data/record/R in data_core.medical)
-					if ((R.fields["name"] == M.real_name))
-						del(R)
-				for(var/datum/data/record/T in data_core.security)
-					if ((T.fields["name"] == M.real_name))
-						del(T)
-				for(var/datum/data/record/G in data_core.general)
-					if ((G.fields["name"] == M.real_name))
-						del(G)
-
-				//Make an announcement and log the person entering storage.
-				//frozen_crew += "[M.real_name]"
-
-				message_admins("\blue [key_name_admin(usr)] has admin cryoed [key_name(M)]")
-				log_admin("[key_name(usr)] admin cryoed [key_name(M)]")
-
-				// Delete the mob.
-				//This should guarantee that ghosts don't spawn.
-				M.ckey = null
-				del(M)
-				M = null
+	var/confirm = alert(src, "You will be removing [M] from the round, are you sure?", "Message", "Yes", "No")
+	if(confirm != "Yes")
 		return
+	if(M.client)
+		confirm = alert(src, "Would you like to ghost [M.key]?", "Message", "Yes", "No", "Cancel")
+		if(confirm == "Cancel")
+			return
+
+	var/job = "Assistant"
+	if(M.mind && M.mind.assigned_role)
+		job = M.mind.assigned_role
+
+	for(var/obj/item/Player_Inventory in M)
+		if(istype(Player_Inventory, /obj/item/organ))
+			qdel(Player_Inventory)
+
+	var/obj/structure/closet/crate/secure/K = new /obj/structure/closet/crate/secure/(M.loc)
+	K.req_access += get_access(job)
+	K.name = (M.real_name + " - " + job + " - SSD Crate")
+	K.health = 1000000
+	K.contents = M.contents
+	for(var/datum/objective/O in all_objectives)
+		if(O.target && istype(O.target,/datum/mind))
+			if(O.target == M.mind)
+				if(O.owner && O.owner.current)
+					O.owner.current << "\red You get the feeling your target is no longer within your reach. Time for Plan [pick(list("A","B","C","D","X","Y","Z"))]..."
+				O.target = null
+				spawn(1) //This should ideally fire after the M is deleted.
+					if(!O) return
+					O.find_target()
+					if(!(O.target))
+						all_objectives -= O
+						O.owner.objectives -= O
+						qdel(O)
+
+	//Handle job slot/tater cleanup.
+	job_master.FreeRole(job)
+
+	if(M.mind && M.mind.objectives.len)
+		qdel(M.mind.objectives)
+		M.mind.special_role = null
+
+	// Delete them from datacore.
+
+	if(PDA_Manifest.len)
+		PDA_Manifest.Cut()
+	for(var/datum/data/record/R in data_core.medical)
+		if ((R.fields["name"] == M.real_name))
+			qdel(R)
+	for(var/datum/data/record/T in data_core.security)
+		if ((T.fields["name"] == M.real_name))
+			qdel(T)
+	for(var/datum/data/record/G in data_core.general)
+		if ((G.fields["name"] == M.real_name))
+			qdel(G)
+
+	//Make an announcement and log the person entering storage.
+	//frozen_crew += "[M.real_name]"
+
+	log_and_message_admins("\blue [key_name_admin(usr)] has admin cryoed [key_name(M)]")
+
+	// Delete the mob.
+	//This should guarantee that ghosts don't spawn.
+	if(confirm)
+		M.ghostize()
+	M.ckey = null
+	qdel(M)
+	M = null
+	return
