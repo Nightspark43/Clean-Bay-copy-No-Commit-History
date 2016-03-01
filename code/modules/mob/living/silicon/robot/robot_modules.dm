@@ -7,7 +7,7 @@ var/global/list/robot_modules = list(
 	"Crisis" 		= /obj/item/weapon/robot_module/medical/crisis,
 	"Surgeon" 		= /obj/item/weapon/robot_module/medical/surgeon,
 	"Security" 		= /obj/item/weapon/robot_module/security/general,
-	"Combat" 		= /obj/item/weapon/robot_module/security/combat,
+	"Asset Protection" 		= /obj/item/weapon/robot_module/combat,
 	"Engineering"	= /obj/item/weapon/robot_module/engineering/general,
 	"Construction"	= /obj/item/weapon/robot_module/engineering/construction,
 	"Janitor" 		= /obj/item/weapon/robot_module/janitor
@@ -645,19 +645,34 @@ var/global/list/robot_modules = list(
 	R.internals = jetpack
 	return
 
-/obj/item/weapon/robot_module/security/combat
+/obj/item/weapon/robot_module/combat
 	name = "combat robot module"
 	sprites = list("Combat Android" = "droid-combat")
 
 /obj/item/weapon/robot_module/combat/New()
 	..()
-	src.modules += new /obj/item/device/flash(src)
 	src.modules += new /obj/item/borg/sight/thermal(src)
-	src.modules += new /obj/item/weapon/gun/energy/laser/mounted(src)
+	src.modules += new /obj/item/weapon/gun/energy/gun/hardmounted(src)
+	src.modules += new /obj/item/weapon/gun/energy/gun/hardmounted/scatter(src)
+	src.modules += new /obj/item/weapon/gun/projectile/heavysniper/mounted(src)
+	src.modules += new /obj/item/weapon/gun/projectile/automatic/wt550/mounted(src)
+	src.modules += new /obj/item/weapon/gripper/ammunition(src)
+	src.modules += new /obj/item/weapon/storage/bag/internal/ammo(src)
 	src.modules += new /obj/item/weapon/pickaxe/plasmacutter(src)
 	src.modules += new /obj/item/borg/combat/shield(src)
 	src.modules += new /obj/item/borg/combat/mobility(src)
-	src.emag = new /obj/item/weapon/gun/energy/lasercannon/mounted(src)
+	src.modules += new /obj/item/weapon/card/robot(src)
+	src.modules += new /obj/item/weapon/crowbar(src)
+
+	var/datum/matter_synth/nanite = new /datum/matter_synth/nanite(10000)
+	synths += nanite
+
+	var/obj/item/stack/nanopaste/N = new /obj/item/stack/nanopaste(src)
+	N.uses_charge = 1
+	N.charge_costs = list(500)
+	N.synths = list(nanite)
+	src.modules += N
+
 	return
 
 /obj/item/weapon/robot_module/drone

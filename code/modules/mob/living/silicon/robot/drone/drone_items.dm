@@ -73,6 +73,18 @@
 
 		)
 
+obj/item/weapon/gripper/ammunition
+	name = "ammunition gripper"
+	icon_state = "gripper-mining"
+	desc = "A simple grasping tool suited the handling of ammunition."
+
+	can_hold = list(
+		/obj/item/ammo_casing,
+		/obj/item/ammo_magazine,
+		/obj/item/robot_parts,
+		/obj/item/borg/upgrade
+		)
+
 /obj/item/weapon/gripper/service //Used to handle food, drinks, and seeds.
 	name = "service gripper"
 	icon_state = "gripper"

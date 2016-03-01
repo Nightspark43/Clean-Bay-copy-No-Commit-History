@@ -134,6 +134,27 @@
 
 	return 1
 
+/obj/item/borg/upgrade/armorreinforcement
+	name = "robotic armor reinforcement module"
+	desc = "Used reinforcement a cyborg's armor."
+	construction_cost = list(DEFAULT_WALL_MATERIAL=80000 , "glass"=6000 , "gold"= 2000, "diamond" = 500)
+	icon_state = "cyborg_upgrade3"
+
+/obj/item/borg/upgrade/armorreinforcement/action(var/mob/living/silicon/robot/R)
+	if(..()) return 0
+
+	var/datum/robot_component/armour/A = R.get_armour()
+	A.max_damage = 240
+	var/datum/robot_component/armour/B = R.get_cell()
+	B.max_damage = 120
+	var/datum/robot_component/armour/C = R.get_actuator()
+	C.max_damage = 120
+	var/datum/robot_component/armour/D = R.get_camera()
+	D.max_damage = 80
+	R.maxHealth = 660
+
+	return 1
+
 /obj/item/borg/upgrade/jetpack
 	name = "mining robot jetpack"
 	desc = "A carbon dioxide jetpack suitable for low-gravity mining operations."

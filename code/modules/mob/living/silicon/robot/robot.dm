@@ -104,6 +104,15 @@
 
 	..()
 
+/mob/living/silicon/robot/combat/New()
+	if(!cell)
+		cell = new /obj/item/weapon/cell(src)
+		cell.maxcharge = 75000
+		cell.charge = 75000
+	crisis = 1
+	crisis_override = 1
+	..()
+
 /mob/living/silicon/robot/New(loc,var/unfinished = 0)
 	spark_system = new /datum/effect/effect/system/spark_spread()
 	spark_system.set_up(5, 0, src)
@@ -264,7 +273,7 @@
 	modules.Add(robot_module_types)
 	if((crisis && security_level == SEC_LEVEL_RED) || crisis_override) //Leaving this in until it's balanced appropriately.
 		src << "\red Crisis mode active. Combat module available."
-		modules+="Combat"
+		modules+="Asset Protection"
 	modtype = input("Please, select a module!", "Robot", null, null) in modules
 
 	if(module)
@@ -789,7 +798,7 @@
 	if(module_active && istype(module_active,/obj/item/borg/combat/shield))
 		overlays += "[module_sprites[icontype]]-shield"
 
-	if(modtype == "Combat")
+	if(modtype == "Asset Protection")
 		if(module_active && istype(module_active,/obj/item/borg/combat/mobility))
 			icon_state = "[module_sprites[icontype]]-roll"
 		else

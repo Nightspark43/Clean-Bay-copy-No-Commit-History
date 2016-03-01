@@ -94,6 +94,12 @@
 	name = "top mounted magazine (9mm rubber)"
 	ammo_type = /obj/item/ammo_casing/c9mmr
 
+/obj/item/ammo_magazine/mc9mmt/rubber/mounted
+	max_ammo = 120
+
+/obj/item/ammo_magazine/mc9mmt/mounted
+	max_ammo = 120
+
 /obj/item/ammo_magazine/mc9mmt/practice
 	name = "top mounted magazine (9mm practice)"
 	ammo_type = /obj/item/ammo_casing/c9mmp

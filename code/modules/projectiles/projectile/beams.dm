@@ -14,6 +14,9 @@
 	tracer_type = /obj/effect/projectile/laser/tracer
 	impact_type = /obj/effect/projectile/laser/impact
 
+/obj/item/projectile/beam/scatter
+		damage = 10
+
 /obj/item/projectile/beam/practice
 	name = "laser"
 	icon_state = "laser"
@@ -138,7 +141,10 @@
 	taser_effect = 1
 	agony = 40
 	damage_type = HALLOSS
-	
+
 	muzzle_type = /obj/effect/projectile/stun/muzzle
 	tracer_type = /obj/effect/projectile/stun/tracer
 	impact_type = /obj/effect/projectile/stun/impact
+
+/obj/item/projectile/beam/stun/scatter
+		agony = 10

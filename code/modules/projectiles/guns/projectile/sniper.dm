@@ -1,6 +1,6 @@
 /obj/item/weapon/gun/projectile/heavysniper
 	name = "\improper PTR-7 rifle"
-	desc = "A portable anti-armour rifle fitted with a scope. Originally designed to used against armoured exosuits, it is capable of punching through windows and non-reinforced walls with ease. Fires armor piercing 14.5mm shells."
+	desc = "A portable anti-armor rifle fitted with a scope. Originally designed to used against armored exosuits, it is capable of punching through windows and non-reinforced walls with ease. Fires armor piercing 14.5mm shells."
 	icon_state = "heavysniper"
 	item_state = "l6closednomag" //placeholder
 	w_class = 4
@@ -18,6 +18,13 @@
 	accuracy = -1
 	scoped_accuracy = 2
 	var/bolt_open = 0
+
+/obj/item/weapon/gun/projectile/heavysniper/mounted
+	name = "\improper hardpoint mounted PTR-7 rifle"
+	desc = "An anti-armor rifle. Originally designed to used against armored exosuits. It fires armor piercing 14.5mm shells and is mounted to a cybernetic hardpoint."
+	//fire_sound = 'sound/weapons/sniper.ogg'
+	max_shells = 6
+	zoomdevicename = "optical scanner"
 
 /obj/item/weapon/gun/projectile/heavysniper/update_icon()
 	if(bolt_open)
@@ -64,4 +71,3 @@
 	set popup_menu = 1
 
 	toggle_scope(2.0)
-

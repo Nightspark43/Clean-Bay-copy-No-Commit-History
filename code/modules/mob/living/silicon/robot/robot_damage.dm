@@ -56,6 +56,30 @@
 		return C
 	return 0
 
+/mob/living/silicon/robot/proc/get_camera()
+
+	if(!components.len) return 0
+	var/datum/robot_component/C = components["camera"]
+	if(C && C.installed == 1)
+		return C
+	return 0
+
+/mob/living/silicon/robot/proc/get_actuator()
+
+	if(!components.len) return 0
+	var/datum/robot_component/C = components["actuator"]
+	if(C && C.installed == 1)
+		return C
+	return 0
+
+/mob/living/silicon/robot/proc/get_cell()
+
+	if(!components.len) return 0
+	var/datum/robot_component/C = components["cell"]
+	if(C && C.installed == 1)
+		return C
+	return 0
+
 /mob/living/silicon/robot/heal_organ_damage(var/brute, var/burn)
 	var/list/datum/robot_component/parts = get_damaged_components(brute,burn)
 	if(!parts.len)	return
