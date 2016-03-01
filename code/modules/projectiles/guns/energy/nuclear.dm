@@ -20,6 +20,30 @@
 	self_recharge = 1
 	use_external_power = 1
 
+/obj/item/weapon/gun/energy/gun/hardmounted
+	name = "\improper hard mounted energy"
+	desc = "An energy-based gun that has been mounted on a cybernetic hardpoint."
+	use_external_power = 1
+	self_recharge = 1
+	max_shots = 34
+	firemodes = list(
+		list(name="stun", projectile_type=/obj/item/projectile/beam/stun, fire_sound='sound/weapons/Taser.ogg'),
+		list(name="lethal", projectile_type=/obj/item/projectile/beam, fire_sound='sound/weapons/Laser.ogg'),
+		list(name="3-round lethal bursts", projectile_type=/obj/item/projectile/beam, fire_sound='sound/weapons/Laser.ogg', burst=3, move_delay=-1, accuracy = list(0,-1,-1,-2,-2), dispersion = list(0.0, 0.6, 1.0)),
+		list(name="3-round stun bursts", projectile_type=/obj/item/projectile/beam/stun, fire_sound='sound/weapons/Taser.ogg', burst=3, move_delay=-1, accuracy = list(0,-1,-1,-2,-2), dispersion = list(0.0, 0.6, 1.0)),
+		)
+
+/obj/item/weapon/gun/energy/gun/hardmounted/scatter
+	name = "\improper hardpoint mounted scatter"
+	desc = "An energy-based scatter gun that has been mounted on a cybernetic hardpoint."
+	use_external_power = 1
+	self_recharge = 1
+	max_shots = 120
+	firemodes = list(
+		list(name="lethal", projectile_type=/obj/item/projectile/beam/scatter, fire_sound='sound/weapons/Laser.ogg', burst=4, move_delay=-1, burst_delay = 0, fire_delay = 0.5, accuracy = list(0,-2,-2,-4,-4), dispersion = list(0.0, 1.2, 2.0)),
+		list(name="stun", projectile_type=/obj/item/projectile/beam/stun/scatter, fire_sound='sound/weapons/Taser.ogg', burst=4, move_delay=-1, burst_delay = 0, fire_delay = 0.5, accuracy = list(0,-2,-2,-4,-4), dispersion = list(0.0, 1.2, 2.0)),
+		)
+
 /obj/item/weapon/gun/energy/gun/nuclear
 	name = "advanced energy gun"
 	desc = "An energy gun with an experimental miniaturized reactor."
@@ -29,12 +53,12 @@
 	force = 8 //looks heavier than a pistol
 	self_recharge = 1
 	modifystate = null
-	
+
 	firemodes = list(
 		list(name="stun", projectile_type=/obj/item/projectile/beam/stun, fire_sound='sound/weapons/Taser.ogg'),
 		list(name="lethal", projectile_type=/obj/item/projectile/beam, fire_sound='sound/weapons/Laser.ogg'),
 		)
-	
+
 	var/lightfail = 0
 
 //override for failcheck behaviour
@@ -53,7 +77,7 @@
 	lightfail = 0
 	if (prob(src.reliability)) return 1 //No failure
 	if (prob(src.reliability))
-		for (var/mob/living/M in range(0,src)) //Only a minor failure, enjoy your radiation if you're in the same tile or carrying it
+		for (var/mob/living/M in range(1,src)) //Only a minor failure, enjoy your radiation if you're in the same tile or carrying it
 			if (src in M.contents)
 				M << "<span class='warning'>Your gun feels pleasantly warm for a moment.</span>"
 			else

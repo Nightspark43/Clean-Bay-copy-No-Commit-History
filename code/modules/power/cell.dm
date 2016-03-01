@@ -144,7 +144,7 @@
 		var/mob/living/silicon/robot/R = loc
 		severity *= R.cell_emp_mult
 
-	charge -= charge / (severity * 2)
+	charge -= 15000 / (severity * 2)
 	if (charge < 0)
 		charge = 0
 	if(reliability != 100 && prob(50/severity))

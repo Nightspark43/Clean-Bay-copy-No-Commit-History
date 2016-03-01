@@ -47,6 +47,32 @@
 		icon_state = "trashbag2"
 	else icon_state = "trashbag3"
 
+  // -----------------------------
+  //        Ammunition Satchel
+  // -----------------------------
+
+/obj/item/weapon/storage/bag/internal
+	name = "internal storage"
+	desc = "This can be used to store and transport small objects."
+	icon = 'icons/obj/mining.dmi'
+	icon_state = "satchel"
+	w_class = 4
+	storage_slots = 8
+	max_storage_space = 16
+	max_w_class = 4
+	can_hold = list() // any
+
+/obj/item/weapon/storage/bag/internal/ammo
+	New()
+		..()
+		new /obj/item/borg/upgrade/armorreinforcement(src)
+		new /obj/item/ammo_magazine/mc9mmt/mounted(src)
+		new /obj/item/ammo_magazine/mc9mmt/mounted(src)
+		new /obj/item/ammo_magazine/mc9mmt/mounted(src)
+		new /obj/item/ammo_magazine/mc9mmt/rubber/mounted(src)
+		new /obj/item/ammo_magazine/mc9mmt/rubber/mounted(src)
+		new /obj/item/ammo_magazine/mc9mmt/rubber/mounted(src)
+		return
 
 // -----------------------------
 //        Plastic Bag
@@ -80,7 +106,6 @@
 	max_storage_space = 200 //Doesn't matter what this is, so long as it's more or equal to storage_slots * ore.w_class
 	max_w_class = 3
 	can_hold = list(/obj/item/weapon/ore)
-
 
 // -----------------------------
 //          Plant bag

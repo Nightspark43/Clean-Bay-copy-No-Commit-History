@@ -10,7 +10,7 @@
 	slot_flags = SLOT_BELT
 	ammo_type = /obj/item/ammo_casing/c9mm
 	multi_aim = 1
-	
+
 	firemodes = list(
 		list(name="semiauto", burst=1, fire_delay=0),
 		list(name="3-round bursts", burst=3, move_delay=4, accuracy = list(0,-1,-1,-2,-2), dispersion = list(0.0, 0.6, 1.0)),
@@ -64,7 +64,7 @@
 	slot_flags = SLOT_BACK
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/c762
-	
+
 	firemodes = list(
 		list(name="semiauto", burst=1, fire_delay=0),
 		list(name="3-round bursts", burst=3, move_delay=6, accuracy = list(0,-1,-1,-2,-2), dispersion = list(0.0, 0.6, 0.6)),
@@ -89,6 +89,13 @@
 	fire_sound = 'sound/weapons/Gunshot_light.ogg'
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/mc9mmt/rubber
+
+/obj/item/weapon/gun/projectile/automatic/wt550/mounted
+	name = "\improper hardpoint mounted W-T 550 Saber"
+	desc = "A Ward-Takahashi PDW that has been mounted on a cybernetic hardpoint."
+	auto_eject = 1
+	auto_eject_sound = 'sound/weapons/smg_empty_alarm.ogg'
+	magazine_type = ""
 
 /obj/item/weapon/gun/projectile/automatic/wt550/update_icon()
 	..()
@@ -117,7 +124,7 @@
 	magazine_type = /obj/item/ammo_magazine/a556
 	auto_eject = 1
 	auto_eject_sound = 'sound/weapons/smg_empty_alarm.ogg'
-	
+
 	burst_delay = 4
 	firemode_type = /datum/firemode/z8
 	firemodes = list(
@@ -125,7 +132,7 @@
 		list(name="3-round bursts", burst=3, move_delay=6, accuracy = list(0,-1,-1), dispersion = list(0.0, 0.6, 0.6)),
 		list(name="fire grenades", use_launcher=1)
 		)
-	
+
 	var/obj/item/weapon/gun/launcher/grenade/underslung/launcher
 
 /obj/item/weapon/gun/projectile/automatic/z8/New()
@@ -185,12 +192,12 @@
 	fire_sound = 'sound/weapons/Gunshot_light.ogg'
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/a762
-	
+
 	firemodes = list(
 		list(name="short bursts",	burst=5, move_delay=6, accuracy = list(0,-1,-1,-2,-2,-2,-3,-3), dispersion = list(0.6, 1.0, 1.0, 1.0, 1.2)),
 		list(name="long bursts",	burst=8, move_delay=8, accuracy = list(0,-1,-1,-2,-2,-2,-3,-3), dispersion = list(1.0, 1.0, 1.0, 1.0, 1.2)),
 		)
-	
+
 	var/cover_open = 0
 
 /obj/item/weapon/gun/projectile/automatic/l6_saw/special_check(mob/user)
