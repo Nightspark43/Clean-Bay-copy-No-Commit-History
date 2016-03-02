@@ -9,7 +9,6 @@
 	origin_tech = "combat=8;materials=2;syndicate=8"
 	caliber = "14.5mm"
 	recoil = 2 //extra kickback
-	//fire_sound = 'sound/weapons/sniper.ogg'
 	handle_casings = HOLD_CASINGS
 	load_method = SINGLE_CASING
 	max_shells = 1
@@ -19,18 +18,24 @@
 	scoped_accuracy = 2
 	var/bolt_open = 0
 
-/obj/item/weapon/gun/projectile/heavysniper/mounted
-	name = "\improper hardpoint mounted PTR-7 rifle"
-	desc = "An anti-armor rifle. Originally designed to used against armored exosuits. It fires armor piercing 14.5mm shells and is mounted to a cybernetic hardpoint."
-	//fire_sound = 'sound/weapons/sniper.ogg'
-	max_shells = 6
-	zoomdevicename = "optical scanner"
-
 /obj/item/weapon/gun/projectile/heavysniper/update_icon()
 	if(bolt_open)
 		icon_state = "heavysniper-open"
 	else
 		icon_state = "heavysniper"
+
+/obj/item/weapon/gun/projectile/heavysniper/mounted
+	name = "\improper cybernetic PTR-7"
+	desc = "An anti-armor rifle. Originally designed to used against armored exosuits. It fires armor piercing 14.5mm shells and is mounted to a cybernetic hardpoint."
+	icon_state = "heavysnipermounted"
+	max_shells = 6
+	zoomdevicename = "optical scanner"
+
+/obj/item/weapon/gun/projectile/heavysniper/mounted/update_icon()
+	if(bolt_open)
+		icon_state = "heavysnipermounted-open"
+	else
+		icon_state = "heavysnipermounted"
 
 /obj/item/weapon/gun/projectile/heavysniper/attack_self(mob/user as mob)
 	playsound(src.loc, 'sound/weapons/flipblade.ogg', 50, 1)

@@ -156,7 +156,7 @@
 					var/choice = input("Are you certain you wish to detonate [R.name]?") in list("Confirm", "Abort")
 					if(choice == "Confirm")
 						if(R && istype(R))
-							if(R.mind && R.mind.special_role && R.emagged)
+							if((R.mind && R.mind.special_role) || R.emagged || R.crisis_override)
 								R << "Extreme danger.  Termination codes detected.  Scrambling security codes and automatic AI unlink triggered."
 								R.ResetSecurityCodes()
 
@@ -174,17 +174,19 @@
 					var/choice = input("Are you certain you wish to [R.canmove ? "lock down" : "release"] [R.name]?") in list("Confirm", "Abort")
 					if(choice == "Confirm")
 						if(R && istype(R))
-							message_admins("\blue [key_name_admin(usr)] [R.canmove ? "locked down" : "released"] [R.name]!")
-							log_game("[key_name(usr)] [R.canmove ? "locked down" : "released"] [R.name]!")
-							R.canmove = !R.canmove
-							if (R.lockcharge)
-							//	R.cell.charge = R.lockcharge
-								R.lockcharge = !R.lockcharge
-								R << "Your lockdown has been lifted!"
+							if((R.mind && R.mind.special_role) || R.emagged || R.crisis_override)
+								R << "Extreme danger.  Lockdown codes detected.  Scrambling security codes and automatic AI unlink triggered."
+								R.ResetSecurityCodes()
 							else
-								R.lockcharge = !R.lockcharge
-						//		R.cell.charge = 0
-								R << "You have been locked down!"
+								message_admins("\blue [key_name_admin(usr)] [R.canmove ? "locked down" : "released"] [R.name]!")
+								log_game("[key_name(usr)] [R.canmove ? "locked down" : "released"] [R.name]!")
+								R.canmove = !R.canmove
+								if (R.lockcharge)
+									R.lockcharge = !R.lockcharge
+									R << "Your lockdown has been lifted!"
+								else
+									R.lockcharge = !R.lockcharge
+									R << "You have been locked down!"
 
 			else
 				usr << "\red Access Denied."
@@ -199,7 +201,7 @@
 					var/choice = input("Are you certain you wish to hack [R.name]?") in list("Confirm", "Abort")
 					if(choice == "Confirm")
 						if(R && istype(R))
-//							message_admins("\blue [key_name_admin(usr)] emagged [R.name] using robotic console!")
+//						message_admins("\blue [key_name_admin(usr)] emagged [R.name] using robotic console!")
 							log_game("[key_name(usr)] emagged [R.name] using robotic console!")
 							R.emagged = 1
 							if(R.mind.special_role)
@@ -220,7 +222,10 @@
 	while(src.timeleft)
 
 	for(var/mob/living/silicon/robot/R in mob_list)
-		if(!R.scrambledcodes && !istype(R, /mob/living/silicon/robot/drone))
+		if((R.mind && R.mind.special_role) || R.emagged || R.crisis_override)
+			R << "Extreme danger.  Lockdown codes detected.  Scrambling security codes and automatic AI unlink triggered."
+			R.ResetSecurityCodes()
+		else
 			R.self_destruct()
 
 	return

@@ -139,6 +139,7 @@
 	desc = "Used reinforcement a cyborg's armor."
 	construction_cost = list(DEFAULT_WALL_MATERIAL=80000 , "glass"=6000 , "gold"= 2000, "diamond" = 500)
 	icon_state = "cyborg_upgrade3"
+	w_class = 2
 
 /obj/item/borg/upgrade/armorreinforcement/action(var/mob/living/silicon/robot/R)
 	if(..()) return 0

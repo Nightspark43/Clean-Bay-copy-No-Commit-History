@@ -102,6 +102,9 @@
 /obj/item/projectile/bullet/pistol
 	damage = 20
 
+/obj/item/projectile/bullet/pistol/small
+	damage = 15
+
 /obj/item/projectile/bullet/pistol/medium
 	damage = 25
 
@@ -111,10 +114,14 @@
 /obj/item/projectile/bullet/pistol/rubber //"rubber" bullets
 	name = "rubber bullet"
 	check_armour = "melee"
-	damage = 10
+	damage = 8
 	agony = 40
 	embed = 0
 	sharp = 0
+
+/obj/item/projectile/bullet/pistol/rubber/small
+	damage = 8
+	agony = 30
 
 /* shotgun projectiles */
 
@@ -125,7 +132,7 @@
 /obj/item/projectile/bullet/shotgun/beanbag		//because beanbags are not bullets
 	name = "beanbag"
 	check_armour = "melee"
-	damage = 20
+	damage = 15
 	agony = 60
 	embed = 0
 	sharp = 0

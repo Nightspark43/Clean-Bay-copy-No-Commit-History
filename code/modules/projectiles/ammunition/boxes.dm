@@ -94,12 +94,6 @@
 	name = "top mounted magazine (9mm rubber)"
 	ammo_type = /obj/item/ammo_casing/c9mmr
 
-/obj/item/ammo_magazine/mc9mmt/rubber/mounted
-	max_ammo = 120
-
-/obj/item/ammo_magazine/mc9mmt/mounted
-	max_ammo = 120
-
 /obj/item/ammo_magazine/mc9mmt/practice
 	name = "top mounted magazine (9mm practice)"
 	ammo_type = /obj/item/ammo_casing/c9mmp
@@ -126,6 +120,30 @@
 	ammo_type = "/obj/item/ammo_casing/a12mm"
 	max_ammo = 20
 	multiple_sprites = 1
+
+/obj/item/ammo_magazine/a12mm/empty
+	initial_ammo = 0
+
+/obj/item/ammo_magazine/a5mm
+	name = "magazine (5mm)"
+	icon_state = "7.63x25m-9"
+	origin_tech = "combat=2"
+	mag_type = MAGAZINE
+	caliber = "5mm"
+	matter = list(DEFAULT_WALL_MATERIAL = 1500)
+	ammo_type = "/obj/item/ammo_casing/a5mm"
+	max_ammo = 280
+	multiple_sprites = 1
+
+/obj/item/ammo_magazine/a5mm/rubber/
+	name = "magazine (5mm rubber)"
+	ammo_type = "/obj/item/ammo_casing/a5mmr"
+
+/obj/item/ammo_magazine/a5mm/mounted
+	max_ammo = 280
+
+/obj/item/ammo_magazine/a5mm/rubber/mounted
+	max_ammo = 280
 
 /obj/item/ammo_magazine/a12mm/empty
 	initial_ammo = 0

@@ -10,8 +10,14 @@
 	flags =  CONDUCT
 	slot_flags = SLOT_BACK
 	charge_cost = 300
-	max_shots = 10
+
 	projectile_type = /obj/item/projectile/ion
+
+/obj/item/weapon/gun/energy/ionrifle/mounted
+	max_shots = 10
+	self_recharge = 1
+	use_external_power = 1
+
 
 /obj/item/weapon/gun/energy/ionrifle/emp_act(severity)
 	..(max(severity, 2)) //so it doesn't EMP itself, I guess

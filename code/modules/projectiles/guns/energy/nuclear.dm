@@ -21,27 +21,22 @@
 	use_external_power = 1
 
 /obj/item/weapon/gun/energy/gun/hardmounted
-	name = "\improper hard mounted energy"
+	name = "\improper cybernetic energy gun"
 	desc = "An energy-based gun that has been mounted on a cybernetic hardpoint."
+	icon_state = "oldenergystun100"
+	modifystate = "oldenergystun"
 	use_external_power = 1
 	self_recharge = 1
-	max_shots = 34
+	fire_delay = 0
+	max_shots = 126
+	recharge_time = 0.01
 	firemodes = list(
-		list(name="stun", projectile_type=/obj/item/projectile/beam/stun, fire_sound='sound/weapons/Taser.ogg'),
-		list(name="lethal", projectile_type=/obj/item/projectile/beam, fire_sound='sound/weapons/Laser.ogg'),
-		list(name="3-round lethal bursts", projectile_type=/obj/item/projectile/beam, fire_sound='sound/weapons/Laser.ogg', burst=3, move_delay=-1, accuracy = list(0,-1,-1,-2,-2), dispersion = list(0.0, 0.6, 1.0)),
-		list(name="3-round stun bursts", projectile_type=/obj/item/projectile/beam/stun, fire_sound='sound/weapons/Taser.ogg', burst=3, move_delay=-1, accuracy = list(0,-1,-1,-2,-2), dispersion = list(0.0, 0.6, 1.0)),
-		)
-
-/obj/item/weapon/gun/energy/gun/hardmounted/scatter
-	name = "\improper hardpoint mounted scatter"
-	desc = "An energy-based scatter gun that has been mounted on a cybernetic hardpoint."
-	use_external_power = 1
-	self_recharge = 1
-	max_shots = 120
-	firemodes = list(
-		list(name="lethal", projectile_type=/obj/item/projectile/beam/scatter, fire_sound='sound/weapons/Laser.ogg', burst=4, move_delay=-1, burst_delay = 0, fire_delay = 0.5, accuracy = list(0,-2,-2,-4,-4), dispersion = list(0.0, 1.2, 2.0)),
-		list(name="stun", projectile_type=/obj/item/projectile/beam/stun/scatter, fire_sound='sound/weapons/Taser.ogg', burst=4, move_delay=-1, burst_delay = 0, fire_delay = 0.5, accuracy = list(0,-2,-2,-4,-4), dispersion = list(0.0, 1.2, 2.0)),
+		list(name="stun", modifystate="oldenergystun", projectile_type=/obj/item/projectile/beam/stun, fire_sound='sound/weapons/Taser.ogg'),
+		list(name="lethal", modifystate="oldenergykill", projectile_type=/obj/item/projectile/beam, fire_sound='sound/weapons/Laser.ogg'),
+		list(name="3-round stun", modifystate="oldenergystun", projectile_type=/obj/item/projectile/beam/stun, fire_sound='sound/weapons/Taser.ogg', burst=3, move_delay=-1, accuracy = list(0,-1,-1,-2,-2), dispersion = list(0.0, 0.6, 1.0)),
+		list(name="3-round lethal", modifystate="oldenergykill", projectile_type=/obj/item/projectile/beam, fire_sound='sound/weapons/Laser.ogg', burst=3, move_delay=-1, accuracy = list(0,-1,-1,-2,-2), dispersion = list(0.0, 0.6, 1.0)),
+		list(name="stun scatter", modifystate="oldenergystun", projectile_type=/obj/item/projectile/beam/stun/scatter, fire_sound='sound/weapons/Taser.ogg', burst=4, move_delay=-1, burst_delay = 0, accuracy = list(0,-2,-2,-4,-4), dispersion = list(0.0, 1.2, 2.0)),
+		list(name="lethal scatter", modifystate="oldenergykill", projectile_type=/obj/item/projectile/beam/scatter, fire_sound='sound/weapons/Laser.ogg', burst=4, move_delay=-1, burst_delay = 0, accuracy = list(0,-2,-2,-4,-4), dispersion = list(0.0, 1.2, 2.0)),
 		)
 
 /obj/item/weapon/gun/energy/gun/nuclear

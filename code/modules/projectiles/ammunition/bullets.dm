@@ -69,6 +69,15 @@
 	caliber = "12mm"
 	projectile_type = /obj/item/projectile/bullet/pistol/medium
 
+/obj/item/ammo_casing/a5mm
+	desc = "A 5mm bullet casing."
+	caliber = "5mm"
+	projectile_type = /obj/item/projectile/bullet/pistol/small
+
+/obj/item/ammo_casing/a5mmr
+	desc = "A 5mm rubber bullet casing."
+	caliber = "5mm"
+	projectile_type = /obj/item/projectile/bullet/pistol/rubber/small
 
 /obj/item/ammo_casing/shotgun
 	name = "shotgun slug"

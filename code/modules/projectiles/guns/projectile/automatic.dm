@@ -52,6 +52,36 @@
 		icon_state = "c20r"
 	return
 
+/obj/item/weapon/gun/projectile/automatic/mounted
+	name = "\improper cybernetic firearm"
+	desc = "A lightweight, fast firing gun that is mounted to a cybernetic hard point."
+	icon_state = "mountedrifle-empty"
+	item_state = "mountedrifle-empty"
+	w_class = 3
+	force = 10
+	caliber = "5mm"
+	origin_tech = "combat=5;materials=2;syndicate=8"
+	slot_flags = SLOT_BELT|SLOT_BACK
+	fire_sound = 'sound/weapons/Gunshot_light.ogg'
+	load_method = MAGAZINE
+	magazine_type = ""
+	auto_eject = 1
+	auto_eject_sound = 'sound/weapons/smg_empty_alarm.ogg'
+	firemodes = list(
+		list(name="semiauto", burst=1, fire_delay=0),
+		list(name="3-round bursts", burst=3, move_delay=0, accuracy = list(0,-1,-1,-2,-2), dispersion = list(0.0, 0.6, 0.6)),
+		list(name="short bursts",	burst=5, move_delay=0, accuracy = list(0,-1,-1,-2,-2), dispersion = list(0.6, 1.0, 1.0, 1.0, 1.2)),
+		list(name="supression", burst_delay=0.5, fire_delay=0, burst=5,  move_delay=0, accuracy = list(0,-1,-1,-2,-2), dispersion = list(1.0, 1.5, 1.5, 1.5, 1.8)),
+		)
+
+/obj/item/weapon/gun/projectile/automatic/mounted/update_icon()
+	..()
+	if(ammo_magazine)
+		icon_state = "mountedrifle"
+	else
+		icon_state = "mountedrifle-empty"
+	return
+
 /obj/item/weapon/gun/projectile/automatic/sts35
 	name = "\improper STS-35 automatic rifle"
 	desc = "A durable, rugged looking automatic weapon of a make popular on the frontier worlds. Uses 7.62mm rounds. It is unmarked."
@@ -89,13 +119,6 @@
 	fire_sound = 'sound/weapons/Gunshot_light.ogg'
 	load_method = MAGAZINE
 	magazine_type = /obj/item/ammo_magazine/mc9mmt/rubber
-
-/obj/item/weapon/gun/projectile/automatic/wt550/mounted
-	name = "\improper hardpoint mounted W-T 550 Saber"
-	desc = "A Ward-Takahashi PDW that has been mounted on a cybernetic hardpoint."
-	auto_eject = 1
-	auto_eject_sound = 'sound/weapons/smg_empty_alarm.ogg'
-	magazine_type = ""
 
 /obj/item/weapon/gun/projectile/automatic/wt550/update_icon()
 	..()

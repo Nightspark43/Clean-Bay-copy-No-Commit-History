@@ -158,8 +158,8 @@
 					var/choice = input("Are you certain you wish to detonate [R.name]?") in list("Confirm", "Abort")
 					if(choice == "Confirm")
 						if(R && istype(R))
-							if(R.mind && R.mind.special_role && R.emagged)
-								R << "Extreme danger.  Termination codes detected.  Scrambling security codes and automatic AI unlink triggered."
+							if((R.mind && R.mind.special_role) || R.emagged || R.crisis_override)
+								R << "Extreme danger.  Lockdown codes detected.  Scrambling security codes and automatic AI unlink triggered."
 								R.ResetSecurityCodes()
 
 							else
@@ -178,15 +178,19 @@
 					var/choice = input("Are you certain you wish to [R.canmove ? "lock down" : "release"] [R.name]?") in list("Confirm", "Abort")
 					if(choice == "Confirm")
 						if(R && istype(R))
-							message_admins("<span class='notice'>[key_name_admin(usr)] [R.canmove ? "locked down" : "released"] [R.name]!</span>")
-							log_game("[key_name(usr)] [R.canmove ? "locked down" : "released"] [key_name(R.name)]!")
-							R.canmove = !R.canmove
-							if (R.lockcharge)
-								R.lockcharge = !R.lockcharge
-								R << "Your lockdown has been lifted!"
+							if((R.mind && R.mind.special_role) || R.emagged || R.crisis_override)
+								R << "Extreme danger.  Lockdown codes detected.  Scrambling security codes and automatic AI unlink triggered."
+								R.ResetSecurityCodes()
 							else
-								R.lockcharge = !R.lockcharge
-								R << "You have been locked down!"
+								message_admins("<span class='notice'>[key_name_admin(usr)] [R.canmove ? "locked down" : "released"] [R.name]!</span>")
+								log_game("[key_name(usr)] [R.canmove ? "locked down" : "released"] [key_name(R.name)]!")
+								R.canmove = !R.canmove
+								if (R.lockcharge)
+									R.lockcharge = !R.lockcharge
+									R << "Your lockdown has been lifted!"
+								else
+									R.lockcharge = !R.lockcharge
+									R << "You have been locked down!"
 
 			else
 				usr << "\red Access Denied."
@@ -206,6 +210,3 @@
 
 		interact()
 		return
-
-
-

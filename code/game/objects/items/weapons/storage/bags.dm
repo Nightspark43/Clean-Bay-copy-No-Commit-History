@@ -59,19 +59,19 @@
 	w_class = 4
 	storage_slots = 8
 	max_storage_space = 16
-	max_w_class = 4
+	max_w_class = 2
 	can_hold = list() // any
 
 /obj/item/weapon/storage/bag/internal/ammo
 	New()
 		..()
 		new /obj/item/borg/upgrade/armorreinforcement(src)
-		new /obj/item/ammo_magazine/mc9mmt/mounted(src)
-		new /obj/item/ammo_magazine/mc9mmt/mounted(src)
-		new /obj/item/ammo_magazine/mc9mmt/mounted(src)
-		new /obj/item/ammo_magazine/mc9mmt/rubber/mounted(src)
-		new /obj/item/ammo_magazine/mc9mmt/rubber/mounted(src)
-		new /obj/item/ammo_magazine/mc9mmt/rubber/mounted(src)
+		new /obj/item/ammo_magazine/a5mm/mounted(src)
+		new /obj/item/ammo_magazine/a5mm/mounted(src)
+		new /obj/item/ammo_magazine/a5mm/mounted(src)
+		new /obj/item/ammo_magazine/a5mm/rubber/mounted(src)
+		new /obj/item/ammo_magazine/a5mm/rubber/mounted(src)
+		new /obj/item/ammo_magazine/a5mm/rubber/mounted(src)
 		return
 
 // -----------------------------

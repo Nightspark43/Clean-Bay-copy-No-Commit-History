@@ -111,6 +111,9 @@
 		cell.charge = 75000
 	crisis = 1
 	crisis_override = 1
+	lawupdate = 0
+	req_access = list(access_cent_general)
+	braintype = "Robot"
 	..()
 
 /mob/living/silicon/robot/New(loc,var/unfinished = 0)
