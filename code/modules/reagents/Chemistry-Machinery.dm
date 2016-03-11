@@ -119,7 +119,7 @@
 
 			if(href_list["amount"])
 				var/id = href_list["add"]
-				var/amount = isgoodnumber(text2num(href_list["amount"]))
+				var/amount = text2num(href_list["amount"])
 				R.trans_id_to(src, id, amount)
 
 		else if (href_list["addcustom"])
@@ -133,7 +133,7 @@
 
 			if(href_list["amount"])
 				var/id = href_list["remove"]
-				var/amount = isgoodnumber(text2num(href_list["amount"]))
+				var/amount = text2num(href_list["amount"])
 				if(mode)
 					reagents.trans_id_to(beaker, id, amount)
 				else
@@ -162,22 +162,15 @@
 		else if (href_list["createpill"] || href_list["createpill_multiple"])
 			var/count = 1
 
-			if(reagents.total_volume/count < 1) //Sanity checking.
-				return
-
-			if (href_list["createpill_multiple"])
-				count = Clamp(isgoodnumber(input("Select the number of pills to make.", 10, pillamount) as num),1,max_pill_count)
-
-			if(reagents.total_volume/count < 1) //Sanity checking.
-				return
+			if (href_list["createpill_multiple"]) count = isgoodnumber(input("Select the number of pills to make.", 10, pillamount) as num)
+			if (count > 14) count = 14	// No more than one bottle of pills at a time.
+			if (count <= 0) return
 
 			var/amount_per_pill = reagents.total_volume/count
 			if (amount_per_pill > 60) amount_per_pill = 60
 
-			var/name = sanitizeSafe(input(usr,"Name:","Name your pill!","[reagents.get_master_reagent_name()] ([amount_per_pill] units)"), MAX_NAME_LEN)
+			var/name = reject_bad_text(input(usr,"Name:","Name your pill!","[reagents.get_master_reagent_name()] ([amount_per_pill] units)"))
 
-			if(reagents.total_volume/count < 1) //Sanity checking.
-				return
 			while (count--)
 				var/obj/item/weapon/reagent_containers/pill/P = new/obj/item/weapon/reagent_containers/pill(src.loc)
 				if(!name) name = reagents.get_master_reagent_name()
