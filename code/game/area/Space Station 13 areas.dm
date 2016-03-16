@@ -1252,10 +1252,9 @@ area/space/atmosalert()
 	icon_state = "medbay3"
 	music = 'sound/ambience/signal.ogg'
 
-/area/crew_quarters/medbreak
+/area/medical/medbreak
 	name = "\improper Break Room"
 	icon_state = "medbay3"
-	music = 'sound/ambience/signal.ogg'
 
 /area/medical/patients_rooms
 	name = "\improper Patient's Rooms"
@@ -1518,6 +1517,10 @@ area/space/atmosalert()
 /area/toxins/server
 	name = "\improper Server Room"
 	icon_state = "server"
+
+/area/rnd/breakroom
+	name = "\improper Research Break Room"
+	icon_state = "research"
 
 //Storage
 
