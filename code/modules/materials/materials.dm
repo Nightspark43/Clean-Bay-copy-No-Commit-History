@@ -526,7 +526,7 @@ var/list/name_to_material
 	sheet_plural_name = "ingots"
 
 /material/mhydrogen
-	name = "mhydrogen"
+	name = "metallic hydrogen"
 	stack_type = /obj/item/stack/material/mhydrogen
 	icon_colour = "#E6C5DE"
 	stack_origin_tech = "materials=6;powerstorage=5;magnets=5"
